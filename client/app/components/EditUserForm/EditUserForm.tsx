@@ -35,7 +35,7 @@ const EditUserForm: FC<
   const handleUpdateUser = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (userPublicName !== editable.publicName || "") {
+    if (userPublicName !== (editable.publicName || "")) {
       // Update public name
       updatePublicName(editable._id, userPublicName)
         .then((res) => {

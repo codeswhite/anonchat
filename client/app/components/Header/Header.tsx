@@ -47,6 +47,9 @@ export const Header: FC<ConnectedProps<typeof connector>> = ({ user }) => {
                     כניסה יזומה למשתמש אחר
                   </Button>
                 </NavLink>
+                <Navbar.Text className="text-warning">
+                  {`מספר אישי נוכחי: ${user.pid}`}
+                </Navbar.Text>
               </>
             ) : (
               <></>

@@ -94,23 +94,25 @@ const Home: FC<ConnectedProps<typeof connector>> = ({
   if (!user._id) return <Navigate to="/login" />;
   switch (status) {
     case EStatus.Ready:
-      return (
-        <div className="mt-4">
-          {userPublicName
-            ? // Public user show all private user chats
-              renderPartiesGrid(user.chats.map((chat) => chat.private))
-            : // Private user show all public users
-              renderPartiesGrid(
-                publicUsers.map((publicUser) => {
-                  return {
-                    id: publicUser._id,
-                    name: publicUser.publicName,
-                    pid: publicUser.pid,
-                  };
-                })
-              )}
-        </div>
-      );
+      if (userPublicName) {
+        // Public user show all private user chats
+        if (!user.chats.length)
+          return <h4>עדיין לא שלחו לך הודעות</h4>
+        return renderPartiesGrid(user.chats.map((chat) => chat.private));
+      } else {
+        // Private user show all public users
+        if (!publicUsers.length)
+          return <h4>עדיין אין משתמשים פומביים במערכת, נא לבקש ממנהל המערכת להגדיר משתמשים פומביים</h4>
+        return renderPartiesGrid(
+          publicUsers.map((publicUser) => {
+            return {
+              id: publicUser._id,
+              name: publicUser.publicName,
+              pid: publicUser.pid,
+            };
+          })
+        );
+      }
 
     case EStatus.Loading:
       return <LoadingScreen />;

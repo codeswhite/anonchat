@@ -27,10 +27,12 @@ app.use("/api/users", apiUsers);
 import apiChats from "./routes/api/Chats";
 app.use("/api/chats", apiChats);
 
-app.use(express.static(path.resolve(__dirname, "../dist")));
-app.get("*", function (req, res) {
-  res.sendFile(path.resolve(__dirname, "../dist/index.html"));
-});
+if (!isDev) {
+  app.use(express.static(path.resolve(__dirname, "../dist")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.resolve(__dirname, "../dist/index.html"));
+  });
+}
 
 app
   .listen(port, "0.0.0.0", () => {

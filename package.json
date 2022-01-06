@@ -17,6 +17,13 @@
   "engines": {
     "node": ">=10"
   },
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "Chrome > 82",
+    "not dead",
+    "IE 11"
+  ],
   "dependencies": {
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
@@ -43,6 +50,7 @@
     "postcss": "^8.4.5",
     "postcss-loader": "^6.2.1",
     "react": "^17.0.2",
+    "react-app-polyfill": "^3.0.0",
     "react-bootstrap": "^2.1.0",
     "react-dom": "^17.0.2",
     "react-hot-loader": "^4.0.0",

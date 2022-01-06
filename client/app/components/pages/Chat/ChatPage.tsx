@@ -72,7 +72,7 @@ const ChatPage: FC<ConnectedProps<typeof connector>> = ({
         console.error(err);
         setStatus(EStatus.Error);
       });
-  }, [partyId, user.chats, user.hash, user.publicName]);
+  }, [partyId, user.chats, user.hash, user.publicName, user.pid]);
 
   const doSendMessage = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();

@@ -15,7 +15,8 @@ const AUTO_LOGIN = true;
 const connector = connect((store: IRootState) => store, { retrieveUser });
 
 const Login: FC<ConnectedProps<typeof connector>> = ({ retrieveUser }) => {
-  const { manualLogin } = useLocation().state as { manualLogin: boolean };
+  const locationState = useLocation().state as { manualLogin?: boolean };
+  const manualLogin = (locationState && locationState.manualLogin) || false;
 
   const [userPid, setUserPid] = useState(0);
   const [redir, setRedir] = useState(false);

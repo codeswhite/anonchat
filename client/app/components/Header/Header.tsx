@@ -5,6 +5,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { connect, ConnectedProps } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { IRootState } from "../../store";
+import { formatName } from "../../utils/formatters";
 
 const connector = connect((store: IRootState) => {
   return { user: store.user };
@@ -15,9 +16,18 @@ export const Header: FC<ConnectedProps<typeof connector>> = ({ user }) => {
     <header>
       <Navbar bg="dark" variant="dark">
         <Container>
-          <LinkContainer to="/">
-            <Navbar.Brand>פניות מפקדים כנף 4</Navbar.Brand>
-          </LinkContainer>
+          <div className="d-flex justify-content-start">
+            <LinkContainer to="/">
+              <Navbar.Brand>פניות מפקדים כנף 4</Navbar.Brand>
+            </LinkContainer>
+            {user._id ? (
+              <Navbar.Text>{`מזהה משתמש: ${formatName(
+                user.publicName ? user.publicName : user.hash
+              )}`}</Navbar.Text>
+            ) : (
+              <></>
+            )}
+          </div>
           <div className="d-flex flex-row-reverse justify-content-end">
             <LinkContainer to="/">
               <Button variant="outline-info" className="ms-3">

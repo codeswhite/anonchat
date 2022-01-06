@@ -9,8 +9,11 @@ import { Navigate } from "react-router-dom";
 import { retrieveUser } from "../../../actions/users";
 import { useLocation } from "react-router";
 import { formatPid } from "../../../utils/formatters";
+import { getUserName } from "../../../utils/getUser";
 
 const AUTO_LOGIN = true;
+const USE_ACTIVEX = false;
+const HARDCODED = 333;
 
 const connector = connect((store: IRootState) => store, { retrieveUser });
 
@@ -32,13 +35,27 @@ const Login: FC<ConnectedProps<typeof connector>> = ({ retrieveUser }) => {
     [retrieveUser]
   );
 
+  const getFormattedActiveXUserName = () => {
+    const raw = getUserName() as string;
+    console.log("[ActiveX] raw=");
+    console.log(raw);
+    if (!raw) {
+      console.error("[Error] Got empty response from ActiveX");
+      return 0;
+    }
+
+    const slice = raw.slice(1);
+    console.log("[ActiveX] raw.slice(1)=");
+    console.log(slice);
+
+    return parseInt(slice) || 0;
+  };
+
   // Automatic user login
   useEffect(() => {
     if (manualLogin || !AUTO_LOGIN) return;
 
-    const HARDCODED = 707;
-    // setUserPid(HARDCODED);
-    fetchUser(HARDCODED);
+    fetchUser(USE_ACTIVEX ? getFormattedActiveXUserName() : HARDCODED);
   }, [fetchUser, manualLogin]);
 
   // Render

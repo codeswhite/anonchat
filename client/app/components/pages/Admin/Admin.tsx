@@ -12,6 +12,7 @@ import EditUserForm from "../../EditUserForm/EditUserForm";
 import { updatePublicName } from "../../../actions/users";
 import { connect, ConnectedProps } from "react-redux";
 import { IRootState } from "../../../store";
+import { formatPid } from "../../../utils/formatters";
 
 const connector = connect((store: IRootState) => store, { updatePublicName });
 
@@ -103,13 +104,15 @@ const Admin: FC<ConnectedProps<typeof connector>> = ({ updatePublicName }) => {
                 required
                 type="number"
                 placeholder="מספר אישי"
-                onChange={(e) => setNewUserPid(parseInt(e.target.value))}
+                value={newUserPid || undefined}
+                onChange={(e) => setNewUserPid(formatPid(e.target.value))}
               />
             </Form.Group>
             <Form.Group className="form-inline col-auto">
               <Form.Control
                 type="text"
                 placeholder="שם פומבי (אופציונאלי)"
+                value={newUserName}
                 onChange={(e) => setNewUserName(e.target.value)}
               />
             </Form.Group>

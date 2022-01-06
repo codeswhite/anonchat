@@ -7,8 +7,8 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Navigate } from "react-router-dom";
 import { retrieveUser } from "../../../actions/users";
-import { max, min } from "lodash";
 import { useLocation } from "react-router";
+import { formatPid } from "../../../utils/formatters";
 
 const AUTO_LOGIN = true;
 
@@ -52,10 +52,7 @@ const Login: FC<ConnectedProps<typeof connector>> = ({ retrieveUser }) => {
         <Form.Control
           type="number"
           value={userPid}
-          onChange={(e) => {
-            const pid = parseInt(e.target.value) || 0;
-            setUserPid(min([max([pid, 0]), 999999999]) || 0);
-          }}
+          onChange={(e) => setUserPid(formatPid(e.target.value))}
         />
         <Button
           className="mt-3"

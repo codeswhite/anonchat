@@ -1,9 +1,9 @@
 {
-  "name": "ortomorrow",
+  "name": "anonchat",
   "version": "1.0.0",
-  "description": "O/R Tomorrow",
-  "author": "A-Tech",
-  "repository": "git+https://github.com/a-m-s-r/ortomorrow",
+  "description": "Anon chat",
+  "author": "Max Grinberg (@codeswhite)",
+  "repository": "https://github.com/codeswhite",
   "private": true,
   "scripts": {
     "build": "webpack --progress --profile -c ./config/webpack.prod.ts",

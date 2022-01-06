@@ -60,7 +60,7 @@ router.get(
 router.put(
   "/:id/setAdmin",
   (req: Request, res: Response, next: NextFunction) => {
-    const { isAdmin } = req.body;
+    const { isAdmin } = req.body || false;
     UserModel.findByIdAndUpdate(req.params.id, { isAdmin }, { new: true })
       .exec()
       .then((user) => res.json(user))
@@ -71,7 +71,7 @@ router.put(
 router.put(
   "/:id/updatePublicName",
   (req: Request, res: Response, next: NextFunction) => {
-    const { publicName } = req.body;
+    const publicName = req.body.publicName || undefined;
     UserModel.findByIdAndUpdate(req.params.id, { publicName }, { new: true })
       .exec()
       .then((user) => res.json(user))

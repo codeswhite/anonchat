@@ -1,9 +1,8 @@
 // Copy this file as config.js in the same folder, with the proper database connection URI.
 
-const remote =
-  process.env.LOCAL_MONGODB || false ? "127.0.0.1" : "git.ortomorrow.com";
+const remote = "127.0.0.1";
 
 export default {
-  db: `mongodb://${remote}/ortomorrow-production?retryWrites=true&w=majority`,
-  db_dev: `mongodb://${remote}/ortomorrow-dev?retryWrites=true&w=majority`,
+  db: `mongodb://${remote}/anonchat-production?retryWrites=true&w=majority`,
+  db_dev: `mongodb://${remote}/anonchat-dev?retryWrites=true&w=majority`,
 };

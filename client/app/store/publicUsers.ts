@@ -24,6 +24,7 @@ function publicUsersReducer(state = initialState, action: AnyAction) {
       return state;
 
     case DELETE_USER:
+      if (!state.length) return state;
       return state.filter((user) => user.pid !== payload.pid);
 
     default:

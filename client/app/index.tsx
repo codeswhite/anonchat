@@ -1,26 +1,34 @@
 import React from "react";
 import { render } from "react-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Provider } from "react-redux";
 
-import { 
-  BrowserRouter, 
-  // Route
-  Routes
-  } from "react-router-dom";
-
-import App from "./components/App/App";
+import Header from "./components/Header/Header";
+import Home from "./components/pages/Home/Home";
+import ChatPage from "./components/pages/Chat/ChatPage";
 
 import "./styles/styles.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.rtl.min.css";
+
+import { getStore } from "./store";
+import Admin from "./components/pages/Admin/Admin";
+import Container from "react-bootstrap/Container";
 
 render(
   <BrowserRouter>
-    <App>
-      <Routes>
-        {/* <Route exact path="/" component={Home}/> */}
-        {/* <Route path="/page1" component={Page1} /> */}
-        {/* <Route component={NotFound}/> */}
-      </Routes>
-    </App>
+    <Provider store={getStore()}>
+      <Header />
+      <main className="mt-4">
+        <Container>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/chat/:partyId" element={<ChatPage />} />
+            <Route element={<h3>הדף לא נמצא 404 :P</h3>} />
+          </Routes>
+        </Container>
+      </main>
+    </Provider>
   </BrowserRouter>,
 
   document.getElementById("app")

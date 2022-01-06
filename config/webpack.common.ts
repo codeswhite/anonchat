@@ -1,4 +1,3 @@
-import webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
@@ -14,9 +13,10 @@ export default {
 
   output: {
     path: root("dist"),
-    publicPath: "/",
+    publicPath: "auto",
     filename: "js/[name].[contenthash:8].js",
     chunkFilename: "[id].[chunkhash:8].chunk.js",
+    clean: true,
   },
 
   resolve: {
@@ -105,8 +105,6 @@ export default {
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    
     new HtmlWebpackPlugin({
       template: root("client/public/index.html"),
       inject: "body",

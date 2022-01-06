@@ -16,6 +16,7 @@ function publicUsersReducer(state = initialState, action: AnyAction) {
       return payload;
 
     case USER_UPDATE_PUBLIC_NAME:
+      if (!state.length) return state;
       // remove old public user
       state = state.filter((publicUser) => publicUser.pid !== payload.pid);
       // add new public user from payload

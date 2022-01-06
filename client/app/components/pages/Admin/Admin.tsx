@@ -159,7 +159,7 @@ const Admin: FC<ConnectedProps<typeof connector>> = ({ updatePublicName }) => {
       );
     default:
       return (
-        <h3>לא הצלחנו לטעון את נתוני הדף הפעם! לא נורא, תמיד יש פעם הבאה ;)</h3>
+        <h4>לא הצלחנו לטעון את נתוני הדף הפעם! לא נורא, תמיד יש פעם הבאה ;)</h4>
       );
   }
 };

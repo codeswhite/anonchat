@@ -29,7 +29,7 @@ render(
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/chat/:partyId" element={<ChatPage />} />
-            <Route element={<h3>הדף לא נמצא 404 :P</h3>} />
+            <Route element={<h4>הדף לא נמצא 404 :P</h4>} />
           </Routes>
         </Container>
       </main>

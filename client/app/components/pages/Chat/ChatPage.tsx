@@ -61,10 +61,8 @@ const ChatPage: FC<ConnectedProps<typeof connector>> = ({
             setChat(ichat);
             // Check who sent the last message
             const lastSenderName = ichat.messages.at(-1)?.from;
-            const userSentLast =
-              (user.publicName && lastSenderName === user.publicName) ||
-              (!user.publicName && lastSenderName === user.hash);
-            setAwaitingResponse(userSentLast);
+            const userName = user.publicName ? user.pid.toString() : user.hash;
+            setAwaitingResponse(lastSenderName === userName);
           }
         });
 

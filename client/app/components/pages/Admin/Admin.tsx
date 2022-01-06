@@ -19,13 +19,13 @@ const connector = connect((store: IRootState) => store, { updatePublicName });
 const Admin: FC<ConnectedProps<typeof connector>> = ({ updatePublicName }) => {
   const [status, setStatus] = useState(EStatus.Loading);
   const [allUsers, setAllUsers] = useState<User[]>([]);
-  const [newUserPid, setNewUserPid] = useState<number | undefined>();
+  const [newUserPid, setNewUserPid] = useState(0);
   const [newUserName, setNewUserName] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [editing, setEditing] = useState<User | undefined>();
   const isMounted = useRef(true);
 
-//todo debug store.publicUsers inside and outside
+  //todo debug store.publicUsers inside and outside
 
   // Load all users
   useEffect(() => {

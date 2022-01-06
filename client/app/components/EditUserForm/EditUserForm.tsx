@@ -26,8 +26,8 @@ const EditUserForm: FC<
   } & ConnectedProps<typeof connector>
 > = ({ editable, done, deleteUser, setAdmin, updatePublicName }) => {
   const [status, setStatus] = useState(EStatus.Ready);
-  const [userPublicName, setUserPublicName] = useState<string | undefined>(
-    editable.publicName
+  const [userPublicName, setUserPublicName] = useState(
+    editable.publicName || ""
   );
   const [userIsAdmin, setUserIsAdmin] = useState<boolean>(editable.isAdmin);
 
@@ -35,7 +35,7 @@ const EditUserForm: FC<
   const handleUpdateUser = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (userPublicName !== editable.publicName) {
+    if (userPublicName !== editable.publicName || "") {
       // Update public name
       updatePublicName(editable._id, userPublicName)
         .then((res) => {
@@ -128,7 +128,7 @@ const EditUserForm: FC<
       );
     default:
       return (
-        <h3>לא הצלחנו לטעון את נתוני הדף הפעם! לא נורא, תמיד יש פעם הבאה ;)</h3>
+        <h4>לא הצלחנו לטעון את נתוני הדף הפעם! לא נורא, תמיד יש פעם הבאה ;)</h4>
       );
   }
 };

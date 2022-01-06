@@ -5,6 +5,6 @@ import commonConfig from "./webpack.common";
 
 const config: Configuration = {
   mode: "production",
-  devtool: "eval-source-map"
+  devtool: "source-map"
 };
 export default merge<Configuration>(commonConfig, config);

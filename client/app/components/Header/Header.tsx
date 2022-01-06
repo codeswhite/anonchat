@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { connect, ConnectedProps } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
+import { NavLink } from "react-router-dom";
 import { IRootState } from "../../store";
 import { formatName } from "../../utils/formatters";
 
@@ -35,11 +36,18 @@ export const Header: FC<ConnectedProps<typeof connector>> = ({ user }) => {
               </Button>
             </LinkContainer>
             {user.isAdmin ? (
-              <LinkContainer to="/admin">
-                <Button variant="outline-warning" className="ms-3">
-                  ניהול
-                </Button>
-              </LinkContainer>
+              <>
+                <LinkContainer to="/admin">
+                  <Button variant="outline-warning" className="ms-3">
+                    ניהול משתמשים
+                  </Button>
+                </LinkContainer>
+                <NavLink to="/login" state={{ manualLogin: true }}>
+                  <Button variant="outline-warning" className="ms-3">
+                    כניסה יזומה למשתמש אחר
+                  </Button>
+                </NavLink>
+              </>
             ) : (
               <></>
             )}

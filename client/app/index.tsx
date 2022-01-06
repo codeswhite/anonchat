@@ -16,6 +16,7 @@ import "bootstrap/dist/css/bootstrap.rtl.min.css";
 import { getStore } from "./store";
 import Admin from "./components/pages/Admin/Admin";
 import Container from "react-bootstrap/Container";
+import Login from "./components/pages/Login/Login";
 
 render(
   <BrowserRouter>
@@ -25,6 +26,7 @@ render(
         <Container>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/chat/:partyId" element={<ChatPage />} />
             <Route element={<h3>הדף לא נמצא 404 :P</h3>} />

@@ -4,19 +4,17 @@ import { connect, ConnectedProps } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { IRootState } from "../../../store";
 import EStatus from "../../../../typings/models/estatus";
-import { retrievePublicUsers, retrieveUser } from "../../../actions/users";
+import { retrievePublicUsers } from "../../../actions/users";
 import GridGenerator from "./GridGenerator/GridGenerator";
 import LoadingScreen from "../../LoadingScreen/LoadingScreen";
 import { formatName } from "../../../utils/formatters";
-
-const HARD_USER = 8507102;
+import { Navigate } from "react-router-dom";
 
 const connector = connect(
   (state: IRootState) => {
     return state;
   },
   {
-    retrieveUser,
     retrievePublicUsers,
   }
 );
@@ -24,28 +22,28 @@ const connector = connect(
 const Home: FC<ConnectedProps<typeof connector>> = ({
   user,
   publicUsers,
-  retrieveUser,
   retrievePublicUsers,
 }) => {
   const [userPublicName, setIsPublic] = useState("");
   const [status, setStatus] = useState(EStatus.Loading);
 
   useEffect(() => {
-    retrieveUser(HARD_USER)
-      .then((user) => {
-        const userPublicName = !user.publicName ? "" : user.publicName;
-        setIsPublic(userPublicName);
-        if (!userPublicName) return retrievePublicUsers();
-      })
-      .then(() => {
-        setStatus(EStatus.Ready);
-      })
-      .catch((err) => {
-        console.error("[Error] retrieve user failed:");
-        console.error(err);
-        setStatus(EStatus.Error);
-      });
-  }, [retrievePublicUsers, retrieveUser]);
+    if (!user._id) return;
+    const userPublicName = !user.publicName ? "" : user.publicName;
+    setIsPublic(userPublicName);
+    if (userPublicName) {
+      setStatus(EStatus.Ready);
+    } else
+      retrievePublicUsers()
+        .then(() => {
+          setStatus(EStatus.Ready);
+        })
+        .catch((err) => {
+          console.error("[Error] retrieve user failed:");
+          console.error(err);
+          setStatus(EStatus.Error);
+        });
+  }, [retrievePublicUsers, user._id, user.publicName]);
 
   const countMessagesWithParty = (id: string) => {
     const chatsLookup = user.chats.filter((chat) => {
@@ -93,6 +91,7 @@ const Home: FC<ConnectedProps<typeof connector>> = ({
     </GridGenerator>
   );
 
+  if (!user._id) return <Navigate to="/login" />;
   switch (status) {
     case EStatus.Ready:
       return (

@@ -7,11 +7,11 @@
   "private": true,
   "scripts": {
     "build": "webpack --progress --profile -c ./config/webpack.prod.ts",
-    "serve-prod": "NODE_ENV=production nodemon -w ./server ./server/server.ts",
+    "serve-prod": "cross-env NODE_ENV=production nodemon -w ./server ./server/server.ts",
     "start": "yarn build && yarn serve-prod",
     "dev": "concurrently \"yarn dev-client\" \"yarn dev-server\"",
     "dev-client": "webpack serve --history-api-fallback -c ./config/webpack.dev.ts",
-    "dev-server": "PORT=9090 LOCAL_MONGODB=1 nodemon -w ./server ./server/server.ts",
+    "dev-server": "cross-env PORT=9090 LOCAL_MONGODB=1 nodemon -w ./server ./server/server.ts",
     "lint": "eslint ."
   },
   "engines": {
@@ -35,6 +35,7 @@
     "babel-loader": "^8.0.0-beta.2",
     "bootstrap": "^5.1.3",
     "concurrently": "^7.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "css-modules-typescript-loader": "^4.0.1",
     "eslint": "^8.6.0",
